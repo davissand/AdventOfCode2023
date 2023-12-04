@@ -8,25 +8,11 @@ input= lines
 cal_values=[]
 cal_sum = 0
 numbers =[]
-for i in input:
-    
-    cal_string = (re.findall(r'(?=(1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine))',i))
-    cal_values.append(cal_string)
-    #cal_sum += int(cal_string[0] + cal_string[-1])
- 
-   # print(cal_sum)
-
-for val in cal_values:
-    for x in val:
-        if x.isdigit():
-            numbers.append(x)
-
-
-
-# print(x)
-# print(cal_sum)
 
 def string_to_number(text):
+    if text.isnumeric():
+        return int(text);
+
     match text:
         case "one":
             return 1
@@ -47,3 +33,17 @@ def string_to_number(text):
         case "nine":
             return 9
         
+#recorriendo la lista de los datos de entrada
+for i in input:
+    #searching for digits or numbers in text and adding the list of numbers found to cal_string
+    cal_string = (re.findall(r'(?=(1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine))',i))
+
+    #adding the first and last value of the list and concatenating the individual numbers in a 2 digits number
+    cal_values.append(int(str(string_to_number(cal_string[0]))+ str(string_to_number(cal_string[-1]))))
+
+total = 0
+for val in cal_values:
+    total += val
+
+print(total)
+print(sum(cal_values))
